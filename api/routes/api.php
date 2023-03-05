@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WeatherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return response()->json([
-        'message' => 'all systems are a go',
-        'users' => \App\Models\User::all(),
-    ]);
-});
+// Route::get('/', function () {
+//     return response()->json([
+//         'message' => 'all systems are a go',
+//         'users' => \App\Models\User::with('Weather')->all(),
+//     ]);
+// });
+
+Route::get('/',[UserController::class,'usersList']);
+Route::post('/store/{userid}',[WeatherController::class,'store']);
+Route::post('/update/{userid}',[WeatherController::class,'update']);
